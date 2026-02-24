@@ -1,7 +1,7 @@
 """Work authorization model."""
 
-from typing import Optional
 from datetime import date
+
 from pydantic import BaseModel
 
 
@@ -9,8 +9,8 @@ class WorkAuthorization(BaseModel):
     """Work authorization model."""
 
     status: str  # e.g., "Authorized to work in US", "Require sponsorship", etc.
-    visa_type: Optional[str] = None  # e.g., "H1B", "Green Card", "Citizen", etc.
-    start_date_availability: Optional[date] = None
+    visa_type: str | None = None  # e.g., "H1B", "Green Card", "Citizen", etc.
+    start_date_availability: date | None = None
     requires_sponsorship: bool = False
 
     class Config:

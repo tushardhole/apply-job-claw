@@ -1,7 +1,7 @@
 """Work experience model."""
 
-from typing import Optional, List
 from datetime import date
+
 from pydantic import BaseModel
 
 
@@ -10,13 +10,13 @@ class WorkExperience(BaseModel):
 
     title: str
     company: str
-    location: Optional[str] = None
+    location: str | None = None
     start_date: date
-    end_date: Optional[date] = None
+    end_date: date | None = None
     current: bool = False
-    description: Optional[str] = None
-    achievements: Optional[List[str]] = None
-    technologies: Optional[List[str]] = None
+    description: str | None = None
+    achievements: list[str] | None = None
+    technologies: list[str] | None = None
 
     class Config:
         """Pydantic config."""

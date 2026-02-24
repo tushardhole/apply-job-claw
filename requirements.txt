@@ -1,5 +1,5 @@
 # Core dependencies
-pydantic>=2.5.0
+pydantic[email]>=2.5.0
 structlog>=23.2.0
 
 # Browser automation

@@ -1,12 +1,13 @@
 """Job application model."""
 
-from typing import Optional, Dict, Any
 from datetime import datetime
-from enum import Enum
+from enum import StrEnum
+from typing import Any
+
 from pydantic import BaseModel, HttpUrl
 
 
-class ApplicationStatus(str, Enum):
+class ApplicationStatus(StrEnum):
     """Job application status enum."""
 
     PENDING = "pending"
@@ -21,13 +22,13 @@ class ApplicationStatus(str, Enum):
 class JobApplication(BaseModel):
     """Job application model."""
 
-    application_id: Optional[int] = None
+    application_id: int | None = None
     user_id: int
     job_url: HttpUrl
     status: ApplicationStatus = ApplicationStatus.PENDING
     started_at: datetime
-    completed_at: Optional[datetime] = None
-    metadata: Dict[str, Any] = {}
+    completed_at: datetime | None = None
+    metadata: dict[str, Any] = {}
 
     class Config:
         """Pydantic config."""

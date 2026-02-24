@@ -1,11 +1,12 @@
 """Form field model."""
 
-from typing import Optional, List, Dict, Any, ClassVar
-from enum import Enum
+from enum import StrEnum
+from typing import Any, ClassVar
+
 from pydantic import BaseModel
 
 
-class FieldType(str, Enum):
+class FieldType(StrEnum):
     """Form field type enum."""
 
     TEXT = "text"
@@ -26,22 +27,22 @@ class FieldType(str, Enum):
 class FormField(BaseModel):
     """Form field model."""
 
-    field_id: Optional[str] = None
+    field_id: str | None = None
     name: str
     field_type: FieldType
-    label: Optional[str] = None
+    label: str | None = None
     selector: str  # CSS selector or XPath
-    value: Optional[str] = None
+    value: str | None = None
     required: bool = False
-    options: Optional[List[str]] = None  # For select/radio fields
-    placeholder: Optional[str] = None
-    validation_pattern: Optional[str] = None
-    metadata: Dict[str, Any] = {}
+    options: list[str] | None = None  # For select/radio fields
+    placeholder: str | None = None
+    validation_pattern: str | None = None
+    metadata: dict[str, Any] = {}
 
     class Config:
         """Pydantic config."""
 
-        json_schema_extra: ClassVar[Dict[str, Any]] = {
+        json_schema_extra: ClassVar[dict[str, Any]] = {
             "example": {
                 "name": "email",
                 "field_type": "email",

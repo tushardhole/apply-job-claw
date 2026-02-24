@@ -1,7 +1,8 @@
 """Telegram bot interface."""
 
-from typing import Protocol, Optional, List, Dict, Any, Callable, Awaitable
 from abc import abstractmethod
+from collections.abc import Awaitable, Callable
+from typing import Any, Protocol
 
 
 class ITelegramBot(Protocol):
@@ -12,12 +13,12 @@ class ITelegramBot(Protocol):
         self,
         chat_id: int,
         text: str,
-        reply_to_message_id: Optional[int] = None,
-        parse_mode: Optional[str] = None,
+        reply_to_message_id: int | None = None,
+        parse_mode: str | None = None,
     ) -> None:
         """
         Send a text message to a chat.
-        
+
         Args:
             chat_id: Chat ID to send message to
             text: Message text
@@ -31,11 +32,11 @@ class ITelegramBot(Protocol):
         self,
         chat_id: int,
         document_path: str,
-        caption: Optional[str] = None,
+        caption: str | None = None,
     ) -> None:
         """
         Send a document/file to a chat.
-        
+
         Args:
             chat_id: Chat ID to send document to
             document_path: Path to the document file
@@ -48,11 +49,11 @@ class ITelegramBot(Protocol):
         self,
         chat_id: int,
         photo_path: str,
-        caption: Optional[str] = None,
+        caption: str | None = None,
     ) -> None:
         """
         Send a photo to a chat.
-        
+
         Args:
             chat_id: Chat ID to send photo to
             photo_path: Path to the photo file
@@ -69,7 +70,7 @@ class ITelegramBot(Protocol):
     ) -> None:
         """
         Register a bot command.
-        
+
         Args:
             command: Command name (without leading slash)
             description: Command description
@@ -78,10 +79,10 @@ class ITelegramBot(Protocol):
         ...
 
     @abstractmethod
-    async def set_commands(self, commands: List[Dict[str, str]]) -> None:
+    async def set_commands(self, commands: list[dict[str, str]]) -> None:
         """
         Set bot commands list for Telegram.
-        
+
         Args:
             commands: List of command dictionaries with 'command' and 'description' keys
         """
@@ -91,15 +92,15 @@ class ITelegramBot(Protocol):
     async def wait_for_message(
         self,
         chat_id: int,
-        timeout: Optional[float] = None,
-    ) -> Optional[Dict[str, Any]]:
+        timeout: float | None = None,
+    ) -> dict[str, Any] | None:
         """
         Wait for a message from a specific chat.
-        
+
         Args:
             chat_id: Chat ID to wait for message from
             timeout: Optional timeout in seconds
-            
+
         Returns:
             Message dictionary or None if timeout
         """
@@ -116,13 +117,13 @@ class ITelegramBot(Protocol):
         ...
 
     @abstractmethod
-    async def get_chat_id(self, user_id: int) -> Optional[int]:
+    async def get_chat_id(self, user_id: int) -> int | None:
         """
         Get chat ID for a user.
-        
+
         Args:
             user_id: Telegram user ID
-            
+
         Returns:
             Chat ID or None if not found
         """

@@ -1,13 +1,13 @@
 """User profile model."""
 
-from typing import Optional, List, Dict
+
 from pydantic import BaseModel
 
-from .personal_info import PersonalInfo
-from .work_authorization import WorkAuthorization
 from .education import Education
-from .work_experience import WorkExperience
+from .personal_info import PersonalInfo
 from .skills import Skills
+from .work_authorization import WorkAuthorization
+from .work_experience import WorkExperience
 
 
 class UserProfile(BaseModel):
@@ -15,12 +15,12 @@ class UserProfile(BaseModel):
 
     personal_info: PersonalInfo
     work_authorization: WorkAuthorization
-    education: List[Education] = []
-    work_experience: List[WorkExperience] = []
+    education: list[Education] = []
+    work_experience: list[WorkExperience] = []
     skills: Skills
-    additional_questions: Dict[str, str] = {}
-    resume_path: Optional[str] = None
-    cover_letter_path: Optional[str] = None
+    additional_questions: dict[str, str] = {}
+    resume_path: str | None = None
+    cover_letter_path: str | None = None
 
     class Config:
         """Pydantic config."""

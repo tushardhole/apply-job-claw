@@ -1,7 +1,7 @@
 """Handler interfaces for job application flow."""
 
-from typing import Protocol, Optional, List, Dict, Any
 from abc import abstractmethod
+from typing import Any, Protocol
 
 
 class IJobApplicationHandler(Protocol):
@@ -15,11 +15,11 @@ class IJobApplicationHandler(Protocol):
     ) -> int:
         """
         Start a new job application process.
-        
+
         Args:
             user_id: User ID
             job_url: Job application URL
-            
+
         Returns:
             Application ID
         """
@@ -29,13 +29,13 @@ class IJobApplicationHandler(Protocol):
     async def process_application(
         self,
         application_id: int,
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         Process a job application (main orchestration method).
-        
+
         Args:
             application_id: Application ID
-            
+
         Returns:
             Status dictionary with application state
         """
@@ -46,14 +46,14 @@ class IJobApplicationHandler(Protocol):
         self,
         application_id: int,
         response: str,
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         Handle user response to a question.
-        
+
         Args:
             application_id: Application ID
             response: User's response text
-            
+
         Returns:
             Status dictionary
         """
@@ -64,14 +64,14 @@ class IJobApplicationHandler(Protocol):
         self,
         application_id: int,
         otp_code: str,
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """
         Handle OTP code from user.
-        
+
         Args:
             application_id: Application ID
             otp_code: OTP code
-            
+
         Returns:
             Status dictionary
         """
@@ -81,7 +81,7 @@ class IJobApplicationHandler(Protocol):
     async def cancel_application(self, application_id: int) -> None:
         """
         Cancel an ongoing application.
-        
+
         Args:
             application_id: Application ID
         """
@@ -92,10 +92,10 @@ class IFormFiller(Protocol):
     """Interface for form filling operations."""
 
     @abstractmethod
-    async def detect_form_fields(self) -> List[Dict[str, Any]]:
+    async def detect_form_fields(self) -> list[dict[str, Any]]:
         """
         Detect all form fields on the current page.
-        
+
         Returns:
             List of form field dictionaries with type, name, selector, etc.
         """
@@ -104,12 +104,12 @@ class IFormFiller(Protocol):
     @abstractmethod
     async def fill_field(
         self,
-        field_info: Dict[str, Any],
+        field_info: dict[str, Any],
         value: str,
     ) -> None:
         """
         Fill a single form field.
-        
+
         Args:
             field_info: Field information dictionary
             value: Value to fill
@@ -119,14 +119,14 @@ class IFormFiller(Protocol):
     @abstractmethod
     async def fill_form(
         self,
-        form_data: Dict[str, Any],
-    ) -> List[Dict[str, Any]]:
+        form_data: dict[str, Any],
+    ) -> list[dict[str, Any]]:
         """
         Fill an entire form with provided data.
-        
+
         Args:
             form_data: Dictionary mapping field names to values
-            
+
         Returns:
             List of fields that couldn't be filled automatically
         """
@@ -136,7 +136,7 @@ class IFormFiller(Protocol):
     async def submit_form(self) -> bool:
         """
         Submit the current form.
-        
+
         Returns:
             True if submission successful, False otherwise
         """
@@ -150,7 +150,7 @@ class IAuthenticationHandler(Protocol):
     async def detect_login_required(self) -> bool:
         """
         Detect if login is required on the current page.
-        
+
         Returns:
             True if login is required, False otherwise
         """
@@ -159,14 +159,14 @@ class IAuthenticationHandler(Protocol):
     @abstractmethod
     async def perform_login(
         self,
-        credentials: Dict[str, str],
+        credentials: dict[str, str],
     ) -> bool:
         """
         Perform login with provided credentials.
-        
+
         Args:
             credentials: Dictionary with username/email and password
-            
+
         Returns:
             True if login successful, False otherwise
         """
@@ -176,7 +176,7 @@ class IAuthenticationHandler(Protocol):
     async def detect_otp_required(self) -> bool:
         """
         Detect if OTP verification is required.
-        
+
         Returns:
             True if OTP required, False otherwise
         """
@@ -186,10 +186,10 @@ class IAuthenticationHandler(Protocol):
     async def submit_otp(self, otp_code: str) -> bool:
         """
         Submit OTP code for verification.
-        
+
         Args:
             otp_code: OTP code
-            
+
         Returns:
             True if OTP accepted, False otherwise
         """
@@ -208,7 +208,7 @@ class IOTPHandler(Protocol):
     ) -> None:
         """
         Request OTP code from user via Telegram.
-        
+
         Args:
             user_id: User ID
             application_id: Application ID
@@ -220,15 +220,15 @@ class IOTPHandler(Protocol):
     async def wait_for_otp(
         self,
         application_id: int,
-        timeout: Optional[float] = None,
-    ) -> Optional[str]:
+        timeout: float | None = None,
+    ) -> str | None:
         """
         Wait for OTP code from user.
-        
+
         Args:
             application_id: Application ID
             timeout: Optional timeout in seconds
-            
+
         Returns:
             OTP code or None if timeout
         """

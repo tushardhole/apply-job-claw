@@ -1,7 +1,7 @@
 """Command handler interfaces."""
 
-from typing import Protocol, Dict, Any, Callable, Awaitable
 from abc import abstractmethod
+from typing import Any, Protocol
 
 
 class ICommandHandler(Protocol):
@@ -15,7 +15,7 @@ class ICommandHandler(Protocol):
     ) -> None:
         """
         Handle a command.
-        
+
         Args:
             update: Telegram update object
             context: Telegram context object
@@ -46,7 +46,7 @@ class ICommandRegistry(Protocol):
     ) -> None:
         """
         Register a command handler.
-        
+
         Args:
             command: Command name (without leading slash)
             handler: Command handler instance
@@ -54,13 +54,13 @@ class ICommandRegistry(Protocol):
         ...
 
     @abstractmethod
-    async def get_handler(self, command: str) -> Optional[ICommandHandler]:
+    async def get_handler(self, command: str) -> ICommandHandler | None:
         """
         Get handler for a command.
-        
+
         Args:
             command: Command name (without leading slash)
-            
+
         Returns:
             Command handler or None if not found
         """
@@ -70,17 +70,17 @@ class ICommandRegistry(Protocol):
     async def register_all_commands(self, bot: Any) -> None:
         """
         Register all commands with Telegram Bot API.
-        
+
         Args:
             bot: Telegram bot instance
         """
         ...
 
     @abstractmethod
-    def get_all_commands(self) -> list[Dict[str, str]]:
+    def get_all_commands(self) -> list[dict[str, str]]:
         """
         Get all registered commands for Telegram.
-        
+
         Returns:
             List of command dictionaries with 'command' and 'description' keys
         """

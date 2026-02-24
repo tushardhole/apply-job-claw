@@ -1,7 +1,7 @@
 """Browser automation interface."""
 
-from typing import Protocol, Optional, List, Dict, Any
 from abc import abstractmethod
+from typing import Any, Protocol
 
 
 class IBrowserAutomation(Protocol):
@@ -11,7 +11,7 @@ class IBrowserAutomation(Protocol):
     async def navigate(self, url: str) -> None:
         """
         Navigate to a URL.
-        
+
         Args:
             url: URL to navigate to
         """
@@ -21,7 +21,7 @@ class IBrowserAutomation(Protocol):
     async def get_current_url(self) -> str:
         """
         Get the current page URL.
-        
+
         Returns:
             Current page URL
         """
@@ -31,7 +31,7 @@ class IBrowserAutomation(Protocol):
     async def get_page_title(self) -> str:
         """
         Get the current page title.
-        
+
         Returns:
             Page title
         """
@@ -39,15 +39,15 @@ class IBrowserAutomation(Protocol):
 
     @abstractmethod
     async def find_element(
-        self, selector: str, timeout: Optional[float] = None
-    ) -> Optional[Any]:
+        self, selector: str, timeout: float | None = None
+    ) -> Any | None:
         """
         Find an element by CSS selector or XPath.
-        
+
         Args:
             selector: CSS selector or XPath
             timeout: Optional timeout in seconds
-            
+
         Returns:
             Element if found, None otherwise
         """
@@ -55,25 +55,25 @@ class IBrowserAutomation(Protocol):
 
     @abstractmethod
     async def find_elements(
-        self, selector: str, timeout: Optional[float] = None
-    ) -> List[Any]:
+        self, selector: str, timeout: float | None = None
+    ) -> list[Any]:
         """
         Find multiple elements by CSS selector or XPath.
-        
+
         Args:
             selector: CSS selector or XPath
             timeout: Optional timeout in seconds
-            
+
         Returns:
             List of elements
         """
         ...
 
     @abstractmethod
-    async def click(self, selector: str, timeout: Optional[float] = None) -> None:
+    async def click(self, selector: str, timeout: float | None = None) -> None:
         """
         Click an element.
-        
+
         Args:
             selector: CSS selector or XPath
             timeout: Optional timeout in seconds
@@ -82,11 +82,11 @@ class IBrowserAutomation(Protocol):
 
     @abstractmethod
     async def fill(
-        self, selector: str, value: str, timeout: Optional[float] = None
+        self, selector: str, value: str, timeout: float | None = None
     ) -> None:
         """
         Fill an input field.
-        
+
         Args:
             selector: CSS selector or XPath
             value: Value to fill
@@ -99,11 +99,11 @@ class IBrowserAutomation(Protocol):
         self,
         selector: str,
         value: str,
-        timeout: Optional[float] = None,
+        timeout: float | None = None,
     ) -> None:
         """
         Select an option from a dropdown.
-        
+
         Args:
             selector: CSS selector or XPath for the select element
             value: Option value to select
@@ -116,11 +116,11 @@ class IBrowserAutomation(Protocol):
         self,
         selector: str,
         file_path: str,
-        timeout: Optional[float] = None,
+        timeout: float | None = None,
     ) -> None:
         """
         Upload a file to a file input.
-        
+
         Args:
             selector: CSS selector or XPath for the file input
             file_path: Path to the file to upload
@@ -130,11 +130,11 @@ class IBrowserAutomation(Protocol):
 
     @abstractmethod
     async def wait_for_element(
-        self, selector: str, timeout: Optional[float] = None
+        self, selector: str, timeout: float | None = None
     ) -> None:
         """
         Wait for an element to appear.
-        
+
         Args:
             selector: CSS selector or XPath
             timeout: Optional timeout in seconds
@@ -143,25 +143,25 @@ class IBrowserAutomation(Protocol):
 
     @abstractmethod
     async def wait_for_navigation(
-        self, timeout: Optional[float] = None
+        self, timeout: float | None = None
     ) -> None:
         """
         Wait for page navigation to complete.
-        
+
         Args:
             timeout: Optional timeout in seconds
         """
         ...
 
     @abstractmethod
-    async def get_text(self, selector: str, timeout: Optional[float] = None) -> str:
+    async def get_text(self, selector: str, timeout: float | None = None) -> str:
         """
         Get text content of an element.
-        
+
         Args:
             selector: CSS selector or XPath
             timeout: Optional timeout in seconds
-            
+
         Returns:
             Text content
         """
@@ -172,29 +172,29 @@ class IBrowserAutomation(Protocol):
         self,
         selector: str,
         attribute: str,
-        timeout: Optional[float] = None,
-    ) -> Optional[str]:
+        timeout: float | None = None,
+    ) -> str | None:
         """
         Get an attribute value of an element.
-        
+
         Args:
             selector: CSS selector or XPath
             attribute: Attribute name
             timeout: Optional timeout in seconds
-            
+
         Returns:
             Attribute value or None
         """
         ...
 
     @abstractmethod
-    async def screenshot(self, path: Optional[str] = None) -> bytes:
+    async def screenshot(self, path: str | None = None) -> bytes:
         """
         Take a screenshot.
-        
+
         Args:
             path: Optional path to save screenshot
-            
+
         Returns:
             Screenshot bytes
         """
@@ -204,20 +204,20 @@ class IBrowserAutomation(Protocol):
     async def execute_script(self, script: str) -> Any:
         """
         Execute JavaScript in the browser.
-        
+
         Args:
             script: JavaScript code to execute
-            
+
         Returns:
             Script execution result
         """
         ...
 
     @abstractmethod
-    async def detect_forms(self) -> List[Dict[str, Any]]:
+    async def detect_forms(self) -> list[dict[str, Any]]:
         """
         Detect all forms on the current page.
-        
+
         Returns:
             List of form information dictionaries
         """

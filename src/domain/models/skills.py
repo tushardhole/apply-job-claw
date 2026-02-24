@@ -1,18 +1,17 @@
 """Skills model."""
 
-from typing import Optional, List
 from pydantic import BaseModel
 
 
 class Skills(BaseModel):
     """Skills and certifications model."""
 
-    technical_skills: List[str] = []
-    programming_languages: List[str] = []
-    frameworks: List[str] = []
-    tools: List[str] = []
-    languages: List[str] = []  # Human languages
-    certifications: List[str] = []
+    technical_skills: list[str] = []
+    programming_languages: list[str] = []
+    frameworks: list[str] = []
+    tools: list[str] = []
+    languages: list[str] = []  # Human languages
+    certifications: list[str] = []
 
     class Config:
         """Pydantic config."""

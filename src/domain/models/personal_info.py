@@ -1,6 +1,6 @@
 """Personal information model."""
 
-from typing import Optional
+
 from pydantic import BaseModel, EmailStr, HttpUrl
 
 
@@ -9,15 +9,15 @@ class PersonalInfo(BaseModel):
 
     full_name: str
     email: EmailStr
-    phone: Optional[str] = None
-    address_street: Optional[str] = None
-    address_city: Optional[str] = None
-    address_state: Optional[str] = None
-    address_zip: Optional[str] = None
-    address_country: Optional[str] = None
-    linkedin_url: Optional[HttpUrl] = None
-    portfolio_url: Optional[HttpUrl] = None
-    github_url: Optional[HttpUrl] = None
+    phone: str | None = None
+    address_street: str | None = None
+    address_city: str | None = None
+    address_state: str | None = None
+    address_zip: str | None = None
+    address_country: str | None = None
+    linkedin_url: HttpUrl | None = None
+    portfolio_url: HttpUrl | None = None
+    github_url: HttpUrl | None = None
 
     class Config:
         """Pydantic config."""

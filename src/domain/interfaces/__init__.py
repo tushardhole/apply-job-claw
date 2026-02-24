@@ -1,17 +1,17 @@
 """Domain interfaces."""
 
 from .browser import IBrowserAutomation
-from .telegram import ITelegramBot
-from .llm import ILLMClient
-from .storage import IStorage
-from .resume_parser import IResumeParser
+from .command_handler import ICommandHandler, ICommandRegistry
 from .handlers import (
-    IJobApplicationHandler,
-    IFormFiller,
     IAuthenticationHandler,
+    IFormFiller,
+    IJobApplicationHandler,
     IOTPHandler,
 )
-from .command_handler import ICommandHandler, ICommandRegistry
+from .llm import ILLMClient
+from .resume_parser import IResumeParser
+from .storage import IStorage
+from .telegram import ITelegramBot
 
 __all__ = [
     "IBrowserAutomation",
