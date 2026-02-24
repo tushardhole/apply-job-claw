@@ -8,7 +8,9 @@ import asyncio
 from src.application.services.onboarding_service import OnboardingInput, OnboardingService
 from src.application.services.resume_parser_service import ResumeParserService
 from src.domain.models.user_config import UserConfig
-from src.infrastructure.storage.sqlite_storage import SQLiteStorage  # type: ignore[import-not-found]
+from src.infrastructure.storage.sqlite_storage import (
+    SQLiteStorage,  # type: ignore[import-not-found]
+)
 
 
 async def run_onboarding(args: argparse.Namespace) -> None:
