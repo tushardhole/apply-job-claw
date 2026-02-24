@@ -10,7 +10,7 @@ import structlog
 def configure_logging(level: str = "INFO") -> None:
     """
     Configure structured logging for the application.
-    
+
     Args:
         level: Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
     """
