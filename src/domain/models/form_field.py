@@ -1,6 +1,6 @@
 """Form field model."""
 
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict, Any, ClassVar
 from enum import Enum
 from pydantic import BaseModel
 
@@ -41,7 +41,7 @@ class FormField(BaseModel):
     class Config:
         """Pydantic config."""
 
-        json_schema_extra = {
+        json_schema_extra: ClassVar[Dict[str, Any]] = {
             "example": {
                 "name": "email",
                 "field_type": "email",

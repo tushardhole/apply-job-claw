@@ -38,13 +38,13 @@ def configure_logging(level: str = "INFO") -> None:
     )
 
 
-def get_logger(name: str) -> structlog.BoundLogger:
+def get_logger(name: str) -> Any:
     """
     Get a structured logger instance.
-    
+
     Args:
         name: Logger name (typically __name__)
-        
+
     Returns:
         Configured structlog logger instance
     """
@@ -54,7 +54,7 @@ def get_logger(name: str) -> structlog.BoundLogger:
 def bind_context(**kwargs: Any) -> None:
     """
     Bind context variables to all subsequent log calls.
-    
+
     Args:
         **kwargs: Context variables to bind
     """
